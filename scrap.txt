@@ -1,0 +1,44 @@
+
+mutation {
+    createPost(postInput: { title: "abc", content: "abcde" }), {
+    _id,
+    title
+    creator
+    createdAt
+  }
+}
+
+query {
+  posts(page: ${currentPageNumber}) {
+    posts {
+      _id
+      title
+      creator
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+query {
+      post(id: "${postId}") {
+        _id
+        title
+        content
+        creator
+        createdAt
+        updatedAt
+      }
+    }
+
+mutation {
+  updatePost(id: "112121212", postInput: { title: "abc", content: "abcde", creator: "sj" }), {
+    _id,
+    title,
+    creator
+    content
+    createdAt
+    updatedAt
+  }
+}
+

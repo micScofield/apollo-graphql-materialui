@@ -1,6 +1,7 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const path = require('path')
+const connectDB = require('./db/db')
 
 const graphqlSchema = require('./graphql/schema');
 const graphqlResolver = require('./graphql/resolvers');
@@ -23,16 +24,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(
-//   "/api/graphql",
-//   graphqlHTTP({
-//     schema,
-//     graphiql: true,
-//   })
-// );
-
 app.use(
-  '/graphql',
+  '/api/graphql',
   graphqlHTTP({
     schema: graphqlSchema,
     rootValue: graphqlResolver,
@@ -56,5 +49,5 @@ app.get('*', (req, res) => {
 });
 
 const PORT = process.env.port || 5000
-
+connectDB()
 app.listen(PORT, () => console.log("Server started on 5000"));
